@@ -1573,7 +1573,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: ChampionsList()
+        home: ChampionsList(),
+        theme: ThemeData(fontFamily: 'FrizQuadrata')
     );
   }
 }
@@ -1588,6 +1589,7 @@ class ChampionsList extends StatelessWidget {
 
     return MaterialApp(
       title: title,
+      theme: ThemeData(fontFamily: 'FrizQuadrata'),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
