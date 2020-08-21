@@ -1574,7 +1574,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: ChampionsList(),
-        theme: ThemeData(fontFamily: 'FrizQuadrata')
+        theme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.blueGrey,
+            accentColor: Colors.grey,
+            fontFamily: 'FrizQuadrata'
+        )
     );
   }
 }
@@ -1589,7 +1594,12 @@ class ChampionsList extends StatelessWidget {
 
     return MaterialApp(
       title: title,
-      theme: ThemeData(fontFamily: 'FrizQuadrata'),
+      theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.blueGrey,
+          accentColor: Colors.grey,
+          fontFamily: 'FrizQuadrata'
+      ),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
