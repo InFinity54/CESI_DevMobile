@@ -22,6 +22,7 @@ Pour faire fonctionner le projet correctement, il est nécessaire d'installer :
 
 ## TD Réalisés
  - TD1 : Conception et réalisation d'une interface basée sur le pattern ergonomique "Master / Details"
+ - TD2 : Refactoring UI et Gestion des données (commencé mais pas finalisé)
 
 ## Installer / Démarrer le projet
 
@@ -35,3 +36,13 @@ Lorsqu'il n'y a plus d'erreur, il faut mettre le chemin vers le dossier de Flutt
 Maintenant il faut installer les plugins dans Android Studio, pour cela dans l'écran d'accueil d'Android Studio, aller dans le menu "configure" en bas à droite puis dans "plugins" dans la nouvelle fenêtre, allez dans l'onglet "Marketplace" puis recherchez et installez le plugin Flutter, il faut également accepter l'installation de Dart si demandé. Après l'installation éffectuée, redemarrez Android Studio et choisir "Créer un nouveau projet Flutter". 
 
 ## Problèmes rencontrés / Autres
+### Limitations techniques
+
+L'ordinateur utilisé pour réaliser ce projet est assez vieux, et nous a beaucoup ralenti dans notre avancée à cause d'un manque de puissance pour bon nombre de tâches (génération de l'application, ouverture de fichiers...).
+
+### Gestion des images
+
+Initialement, il était prévu de créer un menu déroulant dans l'AppBar de l'application, afin de permettre un tri de la liste selon la catégorie des éléments. Cette liste devait se présenter sous la forme d'images, mais la gestion des images dans Flutter ne nous a pas permis de réaliser cela comme prévu : Flutter attend dans ce cas des fichiers vectoriels (.svg), et il nous a fallu plusieurs dizaines de minutes de recherche pour le découvrir.
+
+### Documentation de Flutter
+Ayant développés une application Android en Java il y a quelques années, le passage à Flutter était perturbant : la documentation de Flutter est très complète, mais aussi (souvent) trop précise, ce qui rend difficile, lorsque l'on débute avec le framework, d'adapter la documentation à un cas même légèrement différent.
