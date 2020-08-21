@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   runApp(MyApp());
@@ -1573,6 +1574,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: "LoLChamps",
         home: ChampionsList(),
         theme: ThemeData(
             brightness: Brightness.dark,
@@ -1612,8 +1614,12 @@ class ChampionsList extends StatelessWidget {
                 onTap: () {
                   print("Clic sur " + champions[index].getTitle + " !");
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChampionDetails(champion: champions[index]))
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade,
+                        child: ChampionDetails(champion: champions[index]),
+                        inheritTheme: true,
+                        ctx: context),
                   );
                 },
                 child: new Container(
