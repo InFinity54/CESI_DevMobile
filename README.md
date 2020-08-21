@@ -21,6 +21,7 @@ Pour faire fonctionner le projet correctement, il est nécessaire d'installer :
 - L'application sera testée sur un Samsung Galaxy S5 (android 6.0.1) mais aussi sur un émulateur de Google Pixel 3 (android 10).
 
 ## TD Réalisés
+ - TD1 : Conception et réalisation d'une interface basée sur le pattern ergonomique "Master / Details"
 
 ## Installer / Démarrer le projet
 
