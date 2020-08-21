@@ -1576,26 +1576,52 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "LoLChamps",
         home: ChampionsList(),
-        theme: ThemeData(
-            brightness: Brightness.dark,
-            primaryColor: Colors.blueGrey,
-            accentColor: Colors.grey,
-            fontFamily: 'FrizQuadrata'
-        )
     );
   }
 }
 
 class ChampionsList extends StatelessWidget {
+  int catChampsFilter = 0;
+
+  void _changeChampsList(choice) {
+    switch (choice) {
+      case "Tous les champions":
+        setState() {
+          catChampsFilter = 0;
+        }
+        break;
+      case "Champions Top":
+        setState() {
+          catChampsFilter = 1;
+        }
+        break;
+      case "Champions Jungle":
+        setState() {
+          catChampsFilter = 2;
+        }
+        break;
+      case "Champions Mid":
+        setState() {
+          catChampsFilter = 3;
+        }
+        break;
+      case "Champions AD Carry":
+        setState() {
+          catChampsFilter = 4;
+        }
+        break;
+      case "Champions Support":
+        setState() {
+          catChampsFilter = 5;
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final title = 'Liste des personnages';
-    champions.sort((a, b) {
-      return a.id.toLowerCase().compareTo(b.id.toLowerCase());
-    });
-
     return MaterialApp(
-      title: title,
+      title: "Liste des champions",
       theme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: Colors.blueGrey,
@@ -1605,43 +1631,114 @@ class ChampionsList extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          title: Text(title),
-        ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(champions.length, (index){
-            return GestureDetector(
-                onTap: () {
-                  print("Clic sur " + champions[index].getTitle + " !");
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade,
-                        child: ChampionDetails(champion: champions[index]),
-                        inheritTheme: true,
-                        ctx: context),
+          actions: <Widget>[
+            PopupMenuButton<Choice>(
+              onSelected: _changeChampsList,
+              itemBuilder: (BuildContext context) {
+                return choices.map((Choice choice) {
+                  return PopupMenuItem<Choice>(
+                      value: choice,
+                      child: Text(choice.title)
                   );
-                },
-                child: new Container(
-                    padding: new EdgeInsets.all(15.0),
-                    child: new Column(
-                        children: [
-                          Expanded(child: new Image.asset(champions[index].getImage)),
-                          Text(
-                            champions[index].getTitle,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          Text(
+                }).toList();
+              },
+            ),
+          ],
+        ),
+        body: (catChampsFilter == 0) ? AllChampionsList() : FilteredChampionsList(catFilter: catChampsFilter)
+      ),
+    );
+  }
+}
+
+class AllChampionsList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    champions.sort((a, b) {
+      return a.id.toLowerCase().compareTo(b.id.toLowerCase());
+    });
+
+    return GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(champions.length, (index){
+          return GestureDetector(
+              onTap: () {
+                print("Clic sur " + champions[index].getTitle + " !");
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      child: ChampionDetails(champion: champions[index]),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: new Container(
+                  padding: new EdgeInsets.all(15.0),
+                  child: new Column(
+                      children: [
+                        Expanded(child: new Image.asset(champions[index].getImage)),
+                        Text(
+                          champions[index].getTitle,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Text(
                             (champions[index].getDescription.length > 20) ? champions[index].getDescription.substring(0, 17) + "...": champions[index].getDescription
 
-                          )
-                        ]
-                    )
-                )
-            );
-          })
-        ),
-      ),
+                        )
+                      ]
+                  )
+              )
+          );
+        })
+    );
+  }
+}
+
+class FilteredChampionsList extends StatelessWidget {
+  final int catFilter;
+  FilteredChampionsList({Key key, @required this.catFilter}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Champion> champsFiltered = champions.where((i) => i.category == catFilter).toList();
+    champsFiltered.sort((a, b) {
+      return a.id.toLowerCase().compareTo(b.id.toLowerCase());
+    });
+
+    return GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(champsFiltered.length, (index){
+          return GestureDetector(
+              onTap: () {
+                print("Clic sur " + champsFiltered[index].getTitle + " !");
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      child: ChampionDetails(champion: champsFiltered[index]),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: new Container(
+                  padding: new EdgeInsets.all(15.0),
+                  child: new Column(
+                      children: [
+                        Expanded(child: new Image.asset(champsFiltered[index].getImage)),
+                        Text(
+                          champsFiltered[index].getTitle,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Text(
+                            (champsFiltered[index].getDescription.length > 20) ? champsFiltered[index].getDescription.substring(0, 17) + "...": champsFiltered[index].getDescription
+
+                        )
+                      ]
+                  )
+              )
+          );
+        })
     );
   }
 }
@@ -1697,3 +1794,47 @@ class ChampionDetails extends StatelessWidget {
     );
   }
 }
+
+class ChoiceCard extends StatelessWidget {
+  final Choice choice;
+
+  const ChoiceCard({Key key, this.choice}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var textStyle = Theme.of(context).textTheme.display1;
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: Card(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                choice.icon,
+                size: 128.0,
+              ),
+              Text(choice.title, style: textStyle)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Tous les champions'),
+  const Choice(title: 'Champions Top'),
+  const Choice(title: 'Champions Jungle'),
+  const Choice(title: 'Champions Mid'),
+  const Choice(title: 'Champions AD Carry'),
+  const Choice(title: 'Champions Support'),
+];
