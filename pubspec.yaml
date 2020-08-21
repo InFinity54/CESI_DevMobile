@@ -46,11 +46,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/champions/Ahri.jpg
-    - assets/images/champions/Aatrox.jpg
-    - assets/images/champions/Malphite.jpg
-    - assets/images/champions/Sona.jpg
-    - assets/images/champions/Vel'Koz.jpg
+    - assets/images/champions/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
