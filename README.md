@@ -23,6 +23,10 @@ Pour faire fonctionner le projet correctement, il est nécessaire d'installer :
 ## TD Réalisés
  - TD1 : Conception et réalisation d'une interface basée sur le pattern ergonomique "Master / Details"
  - TD2 : Refactoring UI et Gestion des données (commencé mais pas finalisé)
+ 
+## Démonstration du projet
+
+Une vidéo de démonstration de l'application existe sur YouTube, afin de pouvoir découvrir l'application sans avoir besoin de l'installer et de la compiler. La vidéo est disponible [en cliquant ici](https://www.youtube.com/watch?v=hcbbAMdL3_w).
 
 ## Installer / Démarrer le projet
 
